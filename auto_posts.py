@@ -28,7 +28,7 @@ from datetime import datetime, timedelta
 # CONFIGURATION
 # ============================================================
 
-WP_URL             = "https://pixlino.com/wp-json/wp/v2"
+WP_URL             = "https://snapseedqrcode.online/wp-json/wp/v2"
 USERNAME           = os.environ.get("WP_USERNAME", "your_wp_username")
 APP_PASSWORD       = os.environ.get("WP_APP_PASSWORD", "your_app_password")
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "your_token")
