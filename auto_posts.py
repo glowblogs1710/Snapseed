@@ -40,7 +40,7 @@ IMAGES_PER_HEADING = 10           # images per heading
 POST_STATUS        = "publish"    # publish instantly
 
 # --- Gap between posts ---
-POST_GAP_SECONDS   = 60           # change to 7200 for 2 hour gap in production
+POST_GAP_SECONDS   = 30           # change to 7200 for 2 hour gap in production
 
 # --- Slug variation words (tried in order if base slug already exists) ---
 SLUG_VARIATIONS = ["hd", "4k", "new", "latest", "best", "images", "3d"]
@@ -577,15 +577,14 @@ def inject_internal_links(intro_text, keyword, current_title, max_links=3):
     else:
         also_see = ", ".join(anchors[:-1]) + f", and {anchors[-1]}"
 
-    link_sentence = (
-        f' You might also enjoy our related collections: {also_see}.'
+    link_paragraph = (
+        f'<p style="font-size:20px;line-height:1.8;margin-top:16px;margin-bottom:28px;color:#333;">'
+        f'You might also enjoy our related collections: {also_see}.'
+        f'</p>'
     )
 
-    # Append before the closing </p> if present, else just append
-    if intro_text.rstrip().endswith("</p>"):
-        updated = intro_text.rstrip()[:-4] + link_sentence + "</p>"
-    else:
-        updated = intro_text.rstrip() + link_sentence
+    # Always append as a brand-new <p> block after the intro paragraph
+    updated = intro_text.rstrip() + "\n" + link_paragraph
 
     log(f"  ✓ Injected {len(links)} internal link(s) into intro")
     return updated
